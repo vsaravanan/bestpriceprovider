@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06c7f9c6-1c1e-4862-9322-2452b3581635" name="Changes" comment="init" />
+    <list default="true" id="06c7f9c6-1c1e-4862-9322-2452b3581635" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/Chatgpt/BestPriceProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BestPriceProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interview/question/BestPriceProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interview/question/BestPriceProvider.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,15 +19,80 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/vsaravanan/bestpriceprovider.git",
-    "accountId": "c6f49308-01fa-4f13-9edb-fbda66eb0f02"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vsaravanan&quot;
   }
-}]]></component>
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vsaravanan/bestpriceprovider.git&quot;,
+    &quot;accountId&quot;: &quot;c6f49308-01fa-4f13-9edb-fbda66eb0f02&quot;
+  }
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.6643429070482558" />
+      <entry key="MS500" value="1.9214641861987038" />
+      <entry key="S2" value="1.9797597976233297" />
+      <entry key="S5" value="1.991854221631486" />
+      <entry key="S10" value="1.995934018070153" />
+      <entry key="S30" value="2.023484572587157" />
+      <entry key="S60" value="2.1642718340761116" />
+      <entry key="M2" value="2.4830794576491426" />
+      <entry key="M5" value="3.0666639518429806" />
+      <entry key="M10" value="3.4442382822246844" />
+      <entry key="M15" value="3.605691025106642" />
+      <entry key="M30" value="3.7897379990311824" />
+      <entry key="H1" value="3.891342892794015" />
+      <entry key="H2" value="3.9447565774842253" />
+      <entry key="H4" value="3.9721452585491144" />
+      <entry key="D1" value="3.995324804754383" />
+      <entry key="W1" value="3.9993313082978026" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.6643429070558409" />
+      <entry key="MS500" value="0.9274344069829428" />
+      <entry key="S2" value="1.2577295870026064" />
+      <entry key="S5" value="1.5910917985103776" />
+      <entry key="S10" value="1.7700383772500414" />
+      <entry key="S30" value="1.941669529351775" />
+      <entry key="S60" value="2.122471957678804" />
+      <entry key="M2" value="2.4619263874849198" />
+      <entry key="M5" value="3.0581191008027644" />
+      <entry key="M10" value="3.439945963605428" />
+      <entry key="M15" value="3.602824252945884" />
+      <entry key="M30" value="3.78830174009671" />
+      <entry key="H1" value="3.890623989665233" />
+      <entry key="H2" value="3.9443969249130895" />
+      <entry key="H4" value="3.9719653810184683" />
+      <entry key="D1" value="3.995294817962104" />
+      <entry key="W1" value="3.999327024292771" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5,
@@ -43,6 +114,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
@@ -50,10 +122,12 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/practice/java/bestpriceprovider",
+    "last_opened_file_path": "D:/practice/java/bestpriceprovider/Chatgpt",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
@@ -63,6 +137,14 @@
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\practice\java\bestpriceprovider\Chatgpt" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\practice\java\bestpriceprovider\Lovable" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.DemoApplication">
     <configuration name="DemoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="interview.question.DemoApplication" />
@@ -119,6 +201,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
