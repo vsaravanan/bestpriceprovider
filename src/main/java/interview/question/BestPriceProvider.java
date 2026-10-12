@@ -9,13 +9,10 @@ import java.util.EnumSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-
 public class BestPriceProvider {
 
-    // values() clones the array on every call, so cache it.
     private static final Shop[] SHOPS = Shop.values();
 
-    // Built once in the constructor and never modified afterwards.
     private final EnumMap<Commodity, CommodityPrices> prices = new EnumMap<>(Commodity.class);
 
     public BestPriceProvider() {
@@ -39,40 +36,55 @@ public class BestPriceProvider {
         return prices.get(commodity).requireRange().max();
     }
 
-    /** All shops currently quoting the lowest price (several on a tie). Empty if no data yet. */
+    /** Shops quoting the lowest price. Empty if no data yet. */
     public Set<Shop> minPriceShops(@NotNull Commodity commodity) {
         return prices.get(commodity).range().minShops();
     }
 
-    /** All shops currently quoting the highest price (several on a tie). Empty if no data yet. */
+    /** Shops quoting the highest price. Empty if no data yet. */
     public Set<Shop> maxPriceShops(@NotNull Commodity commodity) {
         return prices.get(commodity).range().maxShops();
     }
 
-    /** Immutable snapshot. The sets are unmodifiable and never changed after construction. */
-    private record Range(double min, Set<Shop> minShops, double max, Set<Shop> maxShops) {}
+    /** Immutable snapshot of the current min and max. */
+    private record Range(double min, Set<Shop> minShops, double max, Set<Shop> maxShops) {
+        boolean isEmpty() {
+            return Double.isNaN(min);
+        }
+    }
 
     private static final class CommodityPrices {
         private static final Range EMPTY =
-                new Range(Double.NaN, Collections.emptySet(), Double.NaN, Collections.emptySet());
+                new Range(Double.NaN, Set.of(), Double.NaN, Set.of());
 
         private final double[] latest;          // guarded by "this"; NaN = never reported
-        private volatile Range range = EMPTY;   // lock-free reads
+        private volatile Range range = EMPTY;   // readers use this without a lock
 
-        CommodityPrices(int shops) {
-            latest = new double[shops];
+        CommodityPrices(int shopCount) {
+            latest = new double[shopCount];
             Arrays.fill(latest, Double.NaN);
         }
 
-        synchronized void update(int shopIdx, double price) {
-            latest[shopIdx] = price;
+        synchronized void update(int shopIndex, double price) {
+            latest[shopIndex] = price;
 
             Range updated = computeRange();
-
-            // Record equals() compares min, minShops, max and maxShops (sets compare by content).
             if (!updated.equals(range)) {
                 range = updated;
             }
+        }
+
+        Range range() {
+            return range;
+        }
+
+        /** Returns the current snapshot, or throws if no shop has reported yet. */
+        Range requireRange() {
+            Range current = range;
+            if (current.isEmpty()) {
+                throw new NoSuchElementException("No prices reported yet");
+            }
+            return current;
         }
 
         private Range computeRange() {
@@ -93,16 +105,6 @@ public class BestPriceProvider {
 
             return new Range(lo, Collections.unmodifiableSet(loShops),
                     hi, Collections.unmodifiableSet(hiShops));
-        }
-
-        Range range() {
-            return range;
-        }
-
-        Range requireRange() {
-            Range r = range;
-            if (Double.isNaN(r.min())) throw new NoSuchElementException("No prices reported yet");
-            return r;
         }
     }
 }
