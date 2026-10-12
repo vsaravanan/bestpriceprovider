@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06c7f9c6-1c1e-4862-9322-2452b3581635" name="Changes" comment="grok">
+    <list default="true" id="06c7f9c6-1c1e-4862-9322-2452b3581635" name="Changes" comment="claude">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interview/question/BestPriceProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interview/question/BestPriceProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chatgpt/BestPriceProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/Deleted/Chatgpt/BestPriceProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lovable/BestPriceProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lovable/BestPriceProviderTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lovable/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grok/interview/question/BestPriceProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grok/interview/question/BestPriceProviderTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/interview/question/BestPriceProviderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/interview/question/BestPriceProviderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,23 +40,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0000000011856827" />
-      <entry key="M2" value="1.0000581191083273" />
-      <entry key="M5" value="1.0430920860493842" />
-      <entry key="M10" value="1.4082807037364289" />
-      <entry key="M15" value="1.8700928883266583" />
-      <entry key="M30" value="2.8616487428301367" />
-      <entry key="H1" value="3.7273682387180513" />
-      <entry key="H2" value="4.302496361043982" />
-      <entry key="H4" value="4.634429018194002" />
-      <entry key="D1" value="4.9365937909385025" />
-      <entry key="W1" value="4.99087935256494" />
+      <entry key="MS100" value="1.0142786164098343" />
+      <entry key="MS500" value="1.4275010889459865" />
+      <entry key="S2" value="1.8086010600218005" />
+      <entry key="S5" value="1.9185307978124198" />
+      <entry key="S10" value="1.9584001240674063" />
+      <entry key="S30" value="1.985936542141344" />
+      <entry key="S60" value="1.993090826086438" />
+      <entry key="M2" value="2.0086096141170264" />
+      <entry key="M5" value="2.1772580411845723" />
+      <entry key="M10" value="2.5821434492383086" />
+      <entry key="M15" value="3.0381134597119086" />
+      <entry key="M30" value="4.132346536706496" />
+      <entry key="H1" value="5.217593200098763" />
+      <entry key="H2" value="5.997481687498499" />
+      <entry key="H4" value="6.467139937602996" />
+      <entry key="D1" value="6.906438082107791" />
+      <entry key="W1" value="6.986512587440077" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -72,23 +78,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592641193252643" />
-      <entry key="MS500" value="0.9917167307382933" />
-      <entry key="S2" value="0.9979227189990506" />
-      <entry key="S5" value="0.999168569213607" />
-      <entry key="S10" value="0.9995841981612189" />
-      <entry key="S30" value="0.9998613801725043" />
-      <entry key="S60" value="0.9999306888469364" />
-      <entry key="M2" value="1.000022967239816" />
-      <entry key="M5" value="1.042958152838078" />
-      <entry key="M10" value="1.407764959969947" />
-      <entry key="M15" value="1.869396483714061" />
-      <entry key="M30" value="2.8609408928984688" />
-      <entry key="H1" value="3.7268632179405743" />
-      <entry key="H2" value="4.302194687198174" />
-      <entry key="H4" value="4.634264145241265" />
-      <entry key="D1" value="4.936564196814893" />
-      <entry key="W1" value="4.990875070737017" />
+      <entry key="MS100" value="0.8431117801314831" />
+      <entry key="MS500" value="1.387810017243568" />
+      <entry key="S2" value="1.7978872326060473" />
+      <entry key="S5" value="1.9141583428823228" />
+      <entry key="S10" value="1.9561982782188605" />
+      <entry key="S30" value="1.9851990109444797" />
+      <entry key="S60" value="1.9927215952737005" />
+      <entry key="M2" value="2.0084244626617522" />
+      <entry key="M5" value="2.1771611821555132" />
+      <entry key="M10" value="2.581893032827023" />
+      <entry key="M15" value="3.0377020572801876" />
+      <entry key="M30" value="4.131806704567509" />
+      <entry key="H1" value="5.2171510715227845" />
+      <entry key="H2" value="5.997198315302393" />
+      <entry key="H4" value="6.466979474703856" />
+      <entry key="D1" value="6.9064084120126" />
+      <entry key="W1" value="6.986508272683483" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -139,10 +145,11 @@
       <recent name="D:\practice\java\bestpriceprovider\Chatgpt" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\practice\java\bestpriceprovider\Deleted" />
       <recent name="D:\practice\java\bestpriceprovider\Lovable" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DemoApplication">
+  <component name="RunManager" selected="JUnit.BestPriceProviderTest">
     <configuration name="DemoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="interview.question.DemoApplication" />
       <module name="best-price-provider" />
@@ -173,8 +180,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DemoApplication" />
         <item itemvalue="JUnit.BestPriceProviderTest" />
+        <item itemvalue="Application.DemoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -213,7 +220,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="grok" />
-    <option name="LAST_COMMIT_MESSAGE" value="grok" />
+    <MESSAGE value="claude" />
+    <option name="LAST_COMMIT_MESSAGE" value="claude" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
