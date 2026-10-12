@@ -4,8 +4,8 @@ Runnable Java solution for the `BestPriceProvider` interview challenge.
 
 The application receives live beverage price updates from multiple shops and answers:
 
-- the current minimum price for a commodity
-- the current maximum price for a commodity
+- the current minimum price for a commodity, and the shops currently quoting it
+- the current maximum price for a commodity, and the shops currently quoting it
 
 Each shop has at most one current price per commodity. A later update from the same shop replaces that shop's previous price for that commodity.
 
@@ -52,42 +52,56 @@ ICE_COFFEE min: 3.40 [STARBUCKS] max: 6.00 [TOAST_BOX]
 
 ## Design Notes
 
-`BestPriceProvider` keeps a simple list of `ShopCommodityPrice` records:
+`BestPriceProvider` keeps one `CommodityPrices` object per commodity. It stores the latest price from each shop in a `double[]` indexed by `Shop.ordinal()`, where `NaN` means the shop has not reported yet.
 
-```java
-record ShopCommodityPrice(Shop shop, Commodity commodity, Double price, Double min, Double max)
-```
+On every update, the provider:
 
-For this challenge, each shop reports one latest price for each commodity. The provider stores the latest raw price in nested `ConcurrentHashMap`s:
+1. validates the price (non-negative, not `NaN`, not infinite)
+2. stores it in the reporting shop's slot, replacing that shop's previous price
+3. rescans the (small, fixed) array to find the min, the max and every shop tied at each
+4. publishes the result as an immutable `Range` snapshot
 
-```java
-commodity -> shop -> latest price
-```
+Queries only read the published snapshot:
 
-After each update, it refreshes the records only for the affected commodity:
-
-- `price` is always the shop's latest reported price
-- `min` is populated only for shops currently selling at the market minimum
-- `max` is populated only for shops currently selling at the market maximum
-- non-winning `min` or `max` values are `null`
-
-If multiple shops have the same lowest price, they all have `min` populated. The same logic applies to `max`.
-
-Queries scan the record list for the requested commodity:
-
-- `minPrice` returns the populated market minimum
-- `maxPrice` returns the populated market maximum
+- `minPrice` returns the market minimum
+- `maxPrice` returns the market maximum
 - `minPriceShops` returns all shops tied at the market minimum
 - `maxPriceShops` returns all shops tied at the market maximum
 
-This is easy to explain in an interview and works well because the number of shops and commodities is small.
+A full rescan is easy to explain and correct for any kind of change, including a shop raising its price from the old min or lowering it from the old max. It is cheap because there are only four shops.
 
 ## Concurrency and Trade-offs
 
-- Thread safety is handled with `synchronized` public methods.
-- The nested `ConcurrentHashMap` stores the latest raw updates by commodity and shop.
-- `synchronized` keeps the derived record list consistent while min/max markers are refreshed.
-- Updates and queries are serialized, which is acceptable for this small challenge.
-- The challenge uses `double` prices because that is in the starter signature. In a production payment system, storing prices as integer cents or `BigDecimal` would avoid floating-point representation issues.
+### Design
 
-The trade-off is that each update refreshes records for that commodity, and queries scan the list. This avoids scanning unrelated commodities and avoids temporary stream/list allocations. It is fine for four shops. If the number of shops became very large or queries were extremely frequent, a sorted index such as a `TreeMap` could make min/max lookups faster, but it would add more bookkeeping and locking complexity.
+- Each `Commodity` has its own `CommodityPrices` object, held in an `EnumMap` that is built in the constructor and never modified afterwards.
+- `CommodityPrices` keeps the latest price per shop in a `double[]` indexed by `Shop.ordinal()`. `NaN` means the shop has not reported yet.
+- Every update recomputes the min and max, and the shops that hold them, with a full scan of that array. With four shops this is cheaper and simpler than tracking whether the replaced value was the old min or max, and it handles price increases and decreases the same way.
+- The result is stored in an immutable `Range` record (min, minShops, max, maxShops) and published through a `volatile` field.
+
+### Thread safety
+
+- **Writers:** `update` is `synchronized` per commodity. The price write and the min/max recompute happen in one critical section, so a stale result can never overwrite a newer one. Updates to different commodities do not contend.
+- **Readers:** `minPrice`, `maxPrice`, `minPriceShops` and `maxPriceShops` take no lock. They read one volatile reference, so they always see a consistent snapshot, and a price is never paired with the wrong shops.
+- **Sharing:** the returned shop sets are unmodifiable and never changed after publication, so they are returned without copying.
+
+### High-frequency updates
+
+- Prices are stored as primitives, with no boxing and no hash lookups.
+- A new `Range` is published only when the min, max or tied shops actually change. Most ticks leave the reference as it was.
+- Queries are O(1) and lock-free. Updates are O(number of shops).
+
+### Behaviour notes
+
+- `minPrice` and `maxPrice` throw `NoSuchElementException` if the commodity has no prices yet. `minPriceShops` and `maxPriceShops` return an empty set.
+- Ties are returned in full: every shop quoting the min or max price is included.
+- Invalid prices (negative, `NaN`, infinite) throw `IllegalArgumentException` and leave state unchanged.
+- `minPrice` and `maxPrice` are separate calls, so two consecutive reads may come from different snapshots. A caller that needs both from one snapshot would need a method that returns the `Range`.
+
+### Trade-offs and extensions
+
+- The challenge uses `double` because it is in the starter signature. In a production system, integer cents or `BigDecimal` would avoid floating-point issues, and tie detection with `==` would then be exact.
+- A shop that stops reporting keeps its last price forever. A per-shop timestamp with a TTL would fix this.
+- Adding a `Shop` or `Commodity` needs no code changes, because the arrays and the `EnumMap` are sized from `values()`.
+- If one commodity received extreme update rates, the per-commodity lock could become a bottleneck. Options are a lock-free design with CAS on the latest prices, or a single-writer queue. For four shops this would add complexity without a measurable benefit.
+- If the number of shops grew very large, a full scan per update would become expensive. A sorted structure such as a `TreeMap` of price to shops would give O(log n) updates and min/max lookups, at the cost of more bookkeeping.
